@@ -1,0 +1,46 @@
+.root
+  display flex
+  justify-content space-between
+  align-items center
+  height 78px
+  padding 14px
+
+.logo
+  display block
+  float left
+  height 46px
+
+.buttonsContainer
+  position absolute
+  width calc(100% - 14px - 14px)
+  // margin 0 auto
+
+.buttonsWrapper
+  display flex
+  justify-content space-around
+  width 592px
+  margin 0 auto
+
+.button
+  height 36px
+  line-height 36px
+  padding 0 25px
+  cursor pointer
+  color: $colors.black
+  text-decoration none
+  &:last-child
+    margin-right 0
+
+.buttonActive
+  font-weight 600
+  box-shadow: inset 0 -3px 0 0 $colors.primary
+
+.userContainer
+  float right
+  cursor pointer
+
+.image
+  display inline
+  margin 0 auto
+  height 100%
+  width auto
