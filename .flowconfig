@@ -1,0 +1,19 @@
+[ignore]
+.*/node_modules/
+.*/dist/
+.*/test
+
+[include]
+
+[libs]
+flow/declarations.js.flow
+
+[options]
+all=true
+module.system.node.resolve_dirname=src
+module.name_mapper.extension='styl' -> '<PROJECT_ROOT>/flow/cssStub.js.flow'
+module.name_mapper.extension='css' -> '<PROJECT_ROOT>/flow/cssStub.js.flow'
+module.name_mapper='^src' -> '<PROJECT_ROOT>/src'
+module.name_mapper='^flow' -> '<PROJECT_ROOT>/flow'
+suppress_comment= \\(.\\|\n\\)*\\$FlowIgnore
+esproposal.decorators=ignore

@@ -10,23 +10,21 @@ import * as UserActions from 'actions/userActions'
 import config from 'src/config'
 
 export default function userSagaBuilder(dispatch: Function) {
-  let subscription
   function *loginUser(action) {
-    const { email, password } = action.user
-
-    // try {
-    //   const { user, authToken } = yield call(Api.user.login, email, password)
-    //   if (user) {
-    //     localStorage.setItem(AUTH_TOKEN_KEY, authToken)
-    //     yield put(UserActions.loginSuccess(user))
-    //     yield put(push('/'))
-    //   }
-    // } catch (errors) {
-    //   const errorsByUniqKey = errors.map(v => (
-    //     { [uuid.v1()]: v }
-    //   ))
-    //   yield put(UserActions.loginFailure({ errors: errorsByUniqKey, ...action.user }))
-    // }
+    const { email, password } = action
+    try {
+      const { user, authToken } = yield call(Api.user.login, email, password)
+      if (user) {
+        localStorage.setItem(AUTH_TOKEN_KEY, authToken)
+        yield put(UserActions.loginSuccess(user))
+        yield put(push('/'))
+      }
+    } catch (errors) {
+      const errorsByUniqKey = errors.map(v => (
+        { [uuid.v1()]: v }
+      ))
+      yield put(UserActions.loginFailure({ errors: errorsByUniqKey, ...action }))
+    }
   }
 
   
@@ -36,21 +34,20 @@ export default function userSagaBuilder(dispatch: Function) {
   }
 
   function *fetchUser(action) {
-    // const { id } = action
-    // try {
-    //   const { data } = yield call(Api.user.get, { id })
-    //   if (data) {
-    //     yield put(UserActions.fetchUserSuccess(data))
-    //   }
-    // } catch (errors) {
-    //   // TODO: should we really remove auth token and redirect when getting errors?
-    //   localStorage.removeItem(AUTH_TOKEN_KEY)
-    //   browserHistory.push('login')
-    //   const errorsByUniqKey = errors.map(v => (
-    //     { [uuid.v1()]: v }
-    //   ))
-    //   yield put(UserActions.loginFailure(errorsByUniqKey))
-    // }
+    const { id } = action
+    try {
+      const { data, response} = yield call(Api.user.get, { id })
+      if (response.status == 200 && data) {
+        yield put(UserActions.fetchUserSuccess(data))
+      }
+    } catch (errors) {
+      localStorage.removeItem(AUTH_TOKEN_KEY)
+      browserHistory.push('login')
+      const errorsByUniqKey = errors.map(v => (
+        { [uuid.v1()]: v }
+      ))
+      yield put(UserActions.loginFailure(errorsByUniqKey))
+    }
   }
 
   function *updateUser(action) {

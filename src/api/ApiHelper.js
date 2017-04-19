@@ -3,7 +3,6 @@
 
 import R from 'ramda'
 import queryString from 'query-string'
-
 import type { HashType } from 'flow/types'
 import { AUTH_TOKEN_KEY } from 'constants/base'
 

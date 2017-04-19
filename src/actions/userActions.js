@@ -46,9 +46,9 @@ export const login = (email: string, password: string) => ({
   type: USER_LOGIN_REQUEST, email, password
 })
 
-// export const loginSuccess = (user: UserType) => ({
-//   type: USER_LOGIN_SUCCESS, user
-// })
+export const loginSuccess = (user: UserType) => ({
+  type: USER_LOGIN_SUCCESS, user
+})
 
 export const fetchUser = (id: number) => ({
   type: USER_FETCH_REQUEST, id
@@ -72,9 +72,9 @@ export const fetchUserSuccess = (user: UserType) => ({
 //   type: USER_SIGNUP_FAILURE, errors
 // })
 
-// export const loginFailure = (errors: ErrorsType) => ({
-//   type: USER_LOGIN_FAILURE, errors
-// })
+export const loginFailure = (errors: ErrorsType) => ({
+  type: USER_LOGIN_FAILURE, errors
+})
 
 // export const logout = () => ({
 //   type: USER_LOGOUT

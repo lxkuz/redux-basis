@@ -1,0 +1,6 @@
+dist
+flow-typed
+node_modules
+vendor/*
+test/*
+webpack/*

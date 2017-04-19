@@ -30,6 +30,7 @@ class LoginPage extends React.Component {
     const { currentUser = {}, handleSubmit, dispatch } = this.props
 
     const onSubmit = handleSubmit((values) => {
+      console.log("handleSubmit!!", values)
       dispatch(UserActions.login(values.email, values.password))
     })
 
@@ -41,20 +42,15 @@ class LoginPage extends React.Component {
     return (
       <div className={styles.root}>
         <div className={styles.content}>
-          <img className={styles.logo} src={logo}/>
           <form className={styles.form} onSubmit={onSubmit}>
-              <Field className={styles.field} component={InputFormWrapper} name='email'/>
+              <Field className={styles.field} component='input' name='email'/>
               <Field
                 className={styles.field}
-                component={InputFormWrapper}
+                component='input'
                 name='password'
                 type='password'
-                asyncErrorMessage={errorMessage}
               />
-            <Button submit icon={disabled ? spin : null} className={styles.button} backgroundColor='pink'>{'SIGN IN'}</Button>
-            <Button className={styles.button} icon={facebook} backgroundColor='blueFacebook'>
-              {'SIGN IN via FACEBOOK'}
-            </Button>
+            <Button type='submit' className={styles.button} >{'SIGN IN'}</Button>
           </form>
         </div>
         <div className={styles.links}>
