@@ -10,6 +10,8 @@ export const INDEX_SUCCESS = 'INDEX_SUCCESS'
 export const CREATE_REQUEST = 'CREATE_REQUEST'
 export const CREATE_SUCCESS = 'CREATE_SUCCESS'
 
+export const GET_REQUEST = 'GET_REQUEST'
+export const GET_SUCCESS = 'GET_SUCCESS'
 
 export const destroy = (resource, id) => ({
   type: DESTROY_REQUEST,
@@ -21,6 +23,16 @@ export const index = (resource, params) => ({
   payload: { resource, params }
 })
 
+export const get = (resource, params) => ({
+  type: GET_REQUEST,
+  payload: { resource, params }
+})
+
+export const getSuccess = (resource, data, form) => ({
+  type: GET_SUCCESS,
+  payload: { resource, data, form }
+})
+
 export const create = (resource, data) => ({
   type: CREATE_REQUEST,
   payload: { resource, data }
@@ -28,6 +40,11 @@ export const create = (resource, data) => ({
 
 export const indexSuccess = (resource, data) => ({
   type: INDEX_SUCCESS,
+  payload: { resource, data }
+})
+
+export const createSuccess = (resource, data) => ({
+  type: CREATE_SUCCESS,
   payload: { resource, data }
 })
 

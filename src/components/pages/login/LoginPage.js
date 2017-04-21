@@ -2,7 +2,8 @@
 import type { HandleSubmitType, DispatchType } from 'flow/types'
 import React from 'react'
 import R from 'ramda'
-import { Field, reduxForm, untouch } from 'redux-form'
+import { reduxForm, untouch } from 'redux-form'
+import { FieldBootstrap as Field } from 'components/pages/base/form/field'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import { Button } from 'react-bootstrap'
@@ -40,23 +41,21 @@ class LoginPage extends React.Component {
       R.path([0]))(currentUser)
 
     return (
-      <div className={styles.root}>
-        <div className={styles.content}>
-          <form className={styles.form} onSubmit={onSubmit}>
-              <Field className={styles.field} component='input' name='email'/>
-              <Field
-                className={styles.field}
-                component='input'
-                name='password'
-                type='password'
-              />
-            <Button type='submit' className={styles.button} >{'SIGN IN'}</Button>
-          </form>
+      <form className='form-horizontal' onSubmit={onSubmit}>
+        <Field label='Email' component='input' name='email'/>
+        <Field
+          label='Password'
+          component='input'
+          name='password'
+          type='password'
+        />
+        <div className='row'>
+          <div className='col-xs-4'/>
+          <div className='col-xs-8'>
+            <Button type='submit' className='btn btn-primary' >SIGN IN</Button>
+          </div>
         </div>
-        <div className={styles.links}>
-          <Link to='/landing' className={styles.link}>{'Don’t have an account? Create one'}</Link>
-        </div>
-      </div>
+      </form>
     )
   }
 }

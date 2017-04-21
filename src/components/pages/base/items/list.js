@@ -12,13 +12,15 @@ type PropsType = {
 }
 
 const List = (props: PropsType) => {
-  const cssTable = classnames('table table-striped', styles.container)
+  const cssTable = classnames('table table-bordered table-striped', styles.container)
   return (
     <table className={cssTable}>
-      <tr>
-        <th className="col-xs-10">Title</th>
-        <th className="col-xs-2">Actions</th>
-      </tr>
+      <thead>
+        <tr>
+          <th key='title' className="text-center col-xs-10">Title</th>
+          <th key='actions' className="text-center col-xs-2">Actions</th>
+        </tr>
+      </thead>
       <tbody>
         {
           props.items.map((item) => {

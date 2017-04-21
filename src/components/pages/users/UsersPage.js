@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
-import type { DispatchType, TicketType } from 'flow/types'
+import type { DispatchType, UserType } from 'flow/types'
 import List from 'components/pages/base/items/List'
 import { buildActions } from 'helpers/ResourcesHelper'
 import { Clearer } from 'helpers/ViewHelper'
@@ -9,29 +9,29 @@ import * as requestsActions from 'actions/requestsActions'
 
 type PropsType = {
   dispatch: DispatchType,
-  tickets: Array<TicketType>
+  users: Array<UserType>
 }
 
-class TicketsPage extends React.Component {
+class UsersPage extends React.Component {
   props: PropsType
   componentWillMount() {
     const { dispatch } = this.props
-    dispatch(requestsActions.index('tickets', {}))
+    dispatch(requestsActions.index('users', {}))
   }
 
   render() {
-    const { tickets, dispatch } = this.props
-    const resource = 'tickets'
+    const { users, dispatch } = this.props
+    const resource = 'users'
     const actions = buildActions(dispatch, resource, ['destroy'])
     return (
       <div>
         <div className='form-group'>
-          <Link className='btn btn-primary pull-right' to='/tickets/new'>
-            New ticket
+          <Link className='btn btn-primary pull-right' to='/users/new'>
+            New user
           </Link>
           <Clearer/>
         </div>
-        <List items={tickets} resource={resource} actions={actions}/>
+        <List items={users} resource={resource} actions={actions}/>
       </div>
     )
   }
@@ -39,5 +39,5 @@ class TicketsPage extends React.Component {
 
 export default connect(state => ({
   currentUser: state.currentUser,
-  tickets: state.requests && state.requests.tickets || []
-}))(TicketsPage)
+  users: state.requests && state.requests.users || []
+}))(UsersPage)

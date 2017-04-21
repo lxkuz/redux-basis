@@ -1,8 +1,8 @@
 // @flow
 import { put, takeLatest, call } from 'redux-saga/effects'
 // import { call, put, takeLatest } from 'redux-saga/effects'
-
-// import { push } from 'react-router-redux'
+import R from 'ramda'
+import { push } from 'react-router-redux'
 import Api from 'src/api/Api'
 
 import * as requestsActions from 'actions/requestsActions'
@@ -26,17 +26,24 @@ function *createItem(action) {
   const { data, resource } = action.payload
   try {
     const res = yield call(Api[resource].create, data)
-    if (res.response.status == 200) {
-      yield put(requestsActions.createSuccess(resource, data))
-    } else {
-      const error = { text: res.response.statusText, status: res.response.status }
-      yield put(requestsActions.requestFailure(resource, error))
-    }
+    yield put(requestsActions.createSuccess(resource, res))
+    yield put(push(`/${resource}`))
   } catch (e) {
     yield put(requestsActions.requestFailure(resource, e))
   }
 }
 
+function *getItem(action) {
+  const { params, resource } = action.payload
+  const { form } = params
+  try {
+    const res = yield call(Api[resource].get, R.omit(['form'], params))
+    console.log(res)
+    yield put(requestsActions.getSuccess(resource, res.data, form))
+  } catch (e) {
+    yield put(requestsActions.requestFailure(resource, e))
+  }
+}
 
 function *indexItems(action) {
   const { payload: { resource, params } } = action
@@ -52,6 +59,7 @@ function *requestsSaga(): Generator<*, *, *> {
   yield takeLatest(requestsActions.DESTROY_REQUEST, destroyItem)
   yield takeLatest(requestsActions.INDEX_REQUEST, indexItems)
   yield takeLatest(requestsActions.CREATE_REQUEST, createItem)
+  yield takeLatest(requestsActions.GET_REQUEST, getItem)
 }
 
 export default requestsSaga

@@ -1,34 +1,46 @@
 import React from 'react'
-import { Link } from 'react-router'
-import styles from './header.styl'
+import { connect } from 'react-redux'
+import type { UserType, DispatchType } from 'flow/types'
+import * as userActions from 'actions/userActions'
+import NavLink from './NavLink'
 
-class Header extends React.Component {
-
-  render() {
-    return (
-      <div className={styles.root}>
-        <div className={styles.buttonsContainer}>
-          <div className={styles.buttonsWrapper}>
-            <Link to='/tickets' className={styles.button} activeClassName={styles.buttonActive}>
-              Tickets
-            </Link>
-            <Link to='/agents' className={styles.button} activeClassName={styles.buttonActive}>
-              Agents
-            </Link>
-            <Link to='/clients' className={styles.button} activeClassName={styles.buttonActive}>
-              Clients
-            </Link>
-            <Link to='/reports' className={styles.button} activeClassName={styles.buttonActive}>
-              Reports
-            </Link>
-            <Link to='/login' className={styles.button} activeClassName={styles.buttonActive}>
-              Login
-            </Link>
-          </div>
-        </div>
-      </div>
-    )
-  }
+type PropsType = {
+  currentUser?: UserType,
+  dispatch: DispatchType
 }
 
-export default Header
+
+const Header = (props: PropsType) => {
+  const { dispatch } = props
+  const Logout = () => {
+    dispatch(userActions.logout())
+  }
+  return (
+    <nav className="navbar navbar-default">
+      <div className="container-fluid">
+        <div className="navbar-header">
+          <a className="navbar-brand" href="#">CrossoverTestApp</a>
+        </div>
+        <ul className="nav navbar-nav">
+          <NavLink to='/tickets'>Tickets</NavLink>
+          <NavLink to='/users'>Users</NavLink>
+          <NavLink to='/reports'>Reports</NavLink>
+        </ul>
+        <ul className="pull-right nav navbar-nav">
+          {
+            !props.currentUser && <NavLink className='pull-right' to='/login'>
+              Login
+            </NavLink>
+          }
+          {
+            props.currentUser && <NavLink onClick={Logout} className='pull-right'>
+              Logout
+            </NavLink>
+          }
+        </ul>
+      </div>
+    </nav>
+  )
+}
+
+export default connect( state => ({ currentUser: state.currentUser }))(Header)

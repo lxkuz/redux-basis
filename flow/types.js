@@ -36,11 +36,21 @@ export type UserType = {
   id: number,
   email: string,
   name: string,
-  updated_at: string
+  updated_at: number
 }
 
 export type TicketType = {
   id: number,
   name: string,
   description?: string
+}
+
+export type TicketKindType = {
+  id: number,
+  name: string
+}
+
+export type ReportType = {
+  id: number,
+  name: string
 }

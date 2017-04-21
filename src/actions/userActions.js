@@ -76,9 +76,9 @@ export const loginFailure = (errors: ErrorsType) => ({
   type: USER_LOGIN_FAILURE, errors
 })
 
-// export const logout = () => ({
-//   type: USER_LOGOUT
-// })
+export const logout = () => ({
+  type: USER_LOGOUT
+})
 
 export const fetchUserFailure = (errors: ErrorsType) => ({
   type: USER_FETCH_FAILURE, errors

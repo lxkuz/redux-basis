@@ -1,26 +1,45 @@
 // import type {  } from 'flow/types'
 import React from 'react'
 import { Link } from 'react-router'
-import { reduxForm, Field } from 'redux-form'
+import type { TickerType, DispatchType } from 'flow/types'
+import { reduxForm } from 'redux-form'
+import * as requestsActions from 'actions/requestsActions'
 import { generateSubmitCallback } from 'helpers/ResourcesHelper'
 import styles from './form.styl'
 
 type PropsType = {
-  url?: string,
   resource: string,
-  item: Object,
-  children: Array<Object>
+  item: TickerType,
+  dispatch: DispatchType,
+  children?: Array<Object>,
+  params?: Object,
+  form: string
 }
 
-const ItemForm = (props: PropsType) => {
-  const { item, resource, dispatch } = props
-  const onSubmit = props.onSubmit || generateSubmitCallback(dispatch, resource)
-  return (
-    <form onSubmit={onSubmit}>
-      { props.children }
-      <button>Submit</button>
-    </form>
-  )
+class ItemForm extends React.Component {
+  constructor(props: PropsType) {
+    super(props)
+    if (props.params && props.params.id) {
+      const { dispatch } = props
+      dispatch(requestsActions.get(props.resource, { form: props.form, id: props.params.id }))
+    }
+  }
+
+  // componentWillMount() {
+  //   const { dispatch, currentUser } = this.props
+  //   if (currentUser == null) return
+  //   dispatch(initialize(FORM_KEY, convertData(currentUser), FIELDS))
+  // }
+
+  render() {
+    const { item, resource, dispatch, handleSubmit } = this.props
+    const onSubmit = this.props.onSubmit || generateSubmitCallback(handleSubmit, dispatch, resource)
+    return (
+      <form className="form-horizontal" onSubmit={onSubmit}>
+        { this.props.children }
+      </form>
+    )
+  }
 }
 
-export default ItemForm
+export default reduxForm({ form: 'ItemForm' })(ItemForm)

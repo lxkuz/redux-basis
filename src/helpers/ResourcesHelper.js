@@ -5,11 +5,10 @@ import React from 'react'
 import * as requestsActions from 'actions/requestsActions'
 
 const btnClasses = {
-  destroy: 'btn btn-danger',
-  edit: 'btn btn-primary',
-  show: 'btn'
+  destroy: 'btn btn-danger btn-sm pull-right',
+  edit: 'btn btn-primary btn-sm pull-right',
+  show: 'btn btn-sm pull-right'
 }
-
 
 export const renderAction = (item, resource, action) => {
   return (
@@ -37,32 +36,12 @@ const buildDestroyAction = (dispatch, resource) => {
   }
 }
 
-const buildEditAction = (dispatch, resource) => {
-  return {
-    name: 'Delete',
-    callback: (id) => {
-      dispatch(requestsActions.destroy(resource, id))
-    }
-  }
-}
-
-const buildShowAction = (dispatch, resource) => {
-  return {
-    name: 'Delete',
-    callback: (id) => {
-      dispatch(requestsActions.destroy(resource, id))
-    }
-  }
-}
-
 export const buildAction = (dispatch, resource, action) => {
   switch(action) {
     case 'destroy':
       return buildDestroyAction(dispatch, resource)
-    case 'edit':
-      return buildEditAction(dispatch, resource)
     default:
-      return buildShowAction(dispatch, resource)
+      return buildDestroyAction(dispatch, resource)
   }
 }
 
@@ -70,12 +49,8 @@ export const buildActions = (dispatch, resource, actions) => (
   R.map(R.curry(buildAction)(dispatch, resource), actions)
 )
 
-export const generateSubmitCallback = (dispatch, resource) => {
-  return (event, _, values) => {
-    console.log('event', event)
-    console.log('values', values)
-    event.preventDefault()
+export const generateSubmitCallback = (handleSubmit, dispatch, resource) => {
+  return handleSubmit((values) => {
     dispatch(requestsActions.create(resource, values))
-  }
+  })
 }
-

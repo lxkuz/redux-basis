@@ -13,9 +13,10 @@ export default function (state: ?{} = null, action: ActionType) {
       }, objects)
       return R.assocPath([resource], results)(state)
     case actions.INDEX_SUCCESS:
-      console.log(action.payload)
       const { data } = action.payload
       return R.assocPath([action.payload.resource], data)(state)
+    case actions.REQUEST_FAILURE:
+      return R.assocPath([action.payload.resource], [])(state)
     default:
       return state
   }
