@@ -12,7 +12,7 @@ export default function (state: ?{} = null, action: ActionType) {
     //   return { confirmed: true }
     case actions.USER_LOGIN_SUCCESS:
     case actions.USER_FETCH_SUCCESS:
-    case actions.USER_UPDATE_SUCCESS:
+    // case actions.USER_UPDATE_SUCCESS:
       return action.user
     // case actions.USER_CONFIRMATION_FAILURE:
     // case actions.USER_LOGIN_FAILURE:
@@ -20,8 +20,8 @@ export default function (state: ?{} = null, action: ActionType) {
     // case actions.USER_FETCH_FAILURE:
     // case actions.USER_UPDATE_FAILURE:
     //   return { ...state, errors: action.errors }
-    // case actions.USER_LOGOUT:
-    //   return null
+    case actions.USER_LOGOUT:
+      return null
     default:
       return state
   }

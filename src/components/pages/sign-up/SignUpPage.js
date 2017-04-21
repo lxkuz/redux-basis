@@ -6,7 +6,6 @@ import { Field, reduxForm } from 'redux-form'
 import validator, { required, passwordLength } from 'src/lib/validator'
 import { connectWithRequests } from 'mystand-redux-requests'
 
-import logo from 'assets/logo.svg'
 import spin from 'components/shared/button/spinner.svg'
 import { signUp } from 'actions/userActions'
 import Button from 'components/shared/button/Button'
@@ -58,7 +57,6 @@ class SignUpPage extends React.Component {
     return(
       <div className={styles.root}>
         <div>
-          <img className={styles.logo} src={logo}/>
           <a className={styles.signinButton} href="/login">sign in</a>
         </div>
         <div className={styles.content}>

@@ -27,7 +27,7 @@ export default {
     jsonFetch(`${backendRoot}/sign_up`, { method: 'POST', ...paramsToOptions(user, 'json') })
   ),
 
-  // acts: crudBuilder.resources(`${backendRoot}/acts`, ['index', 'get', 'destroy', 'create']),
+  tickets: crudBuilder.resources(`${backendRoot}/tickets`, ['index', 'create', 'destroy'])
 
   // streamItems: crudBuilder.resources(`${backendRoot}/stream_items`, ['index', 'get']),
 

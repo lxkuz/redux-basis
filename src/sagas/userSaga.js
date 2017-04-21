@@ -27,7 +27,6 @@ export default function userSagaBuilder(dispatch: Function) {
     }
   }
 
-  
   function logoutUser() {
     localStorage.removeItem(AUTH_TOKEN_KEY)
     browserHistory.push('login')
@@ -49,19 +48,6 @@ export default function userSagaBuilder(dispatch: Function) {
       yield put(UserActions.loginFailure(errorsByUniqKey))
     }
   }
-
-  function *updateUser(action) {
-    // try {
-    //   const { data } = yield call(Api.user.update, action.user)
-    //   if (data.errors) throw data.errors
-    //   if (data) {
-    //     yield put(UserActions.updateUserSuccess(data))
-    //   }
-    // } catch (errors) {
-    //   yield put(UserActions.updateUserFailure(errors))
-    // }
-  }
-
   return function *userSaga(): Generator<*, *, *> {
     yield takeLatest(UserActions.USER_LOGIN_REQUEST, loginUser)
     yield takeLatest(UserActions.USER_LOGOUT, logoutUser)

@@ -1,4 +1,4 @@
-// @flow
+  // @flow
 
 import type { NodeType, DispatchType, UserType } from 'flow/types'
 import React from 'react'
