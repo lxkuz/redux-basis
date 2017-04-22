@@ -1,7 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router'
 import type { UserType, DispatchType } from 'flow/types'
 import * as userActions from 'actions/userActions'
+import Navigation from './Navigation'
 import NavLink from './NavLink'
 
 type PropsType = {
@@ -11,29 +13,39 @@ type PropsType = {
 
 
 const Header = (props: PropsType) => {
-  const { dispatch } = props
+  const { dispatch, currentUser } = props
   const Logout = () => {
     dispatch(userActions.logout())
   }
+
+  const userLabel = (user: UserType) => {
+    if(!user) return null
+    return (
+      <li>
+        <Link to={`/users/${user.id}`}>
+          {`${user.email} ( ${user.role} )`}
+        </Link>
+      </li>
+    )}
+
+  const baseUrl = currentUser ? '/' : '/login'
+
   return (
     <nav className="navbar navbar-default">
       <div className="container-fluid">
         <div className="navbar-header">
-          <a className="navbar-brand" href="#">CrossoverTestApp</a>
+          <Link to={baseUrl} className="navbar-brand">TestApp</Link>
         </div>
-        <ul className="nav navbar-nav">
-          <NavLink to='/tickets'>Tickets</NavLink>
-          <NavLink to='/users'>Users</NavLink>
-          <NavLink to='/reports'>Reports</NavLink>
-        </ul>
+        <Navigation/>
         <ul className="pull-right nav navbar-nav">
           {
-            !props.currentUser && <NavLink className='pull-right' to='/login'>
+            !currentUser && <NavLink className='pull-right' to='/login'>
               Login
             </NavLink>
           }
+          {userLabel(currentUser)}
           {
-            props.currentUser && <NavLink onClick={Logout} className='pull-right'>
+            currentUser && <NavLink onClick={Logout} to='/login' className='pull-right'>
               Logout
             </NavLink>
           }

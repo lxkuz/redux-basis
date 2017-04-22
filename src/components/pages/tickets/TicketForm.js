@@ -1,10 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router'
 import { FieldBootstrap as Field } from 'components/pages/base/form/field'
 import type { DispatchType, TicketKindType } from 'flow/types'
 import ItemForm from 'components/pages/base/form/ItemForm'
-import { Breaker } from 'helpers/ViewHelper'
 import * as requestsActions from 'actions/requestsActions'
 
 type PropsType = {
@@ -34,15 +32,6 @@ class TicketsForm extends React.Component {
             })
           }
         </Field>
-        <hr/>
-        <div className='row'>
-          <div className='col-xs-4'/>
-          <div className='col-xs-8'>
-            <button className="btn btn-primary">Submit</button>
-            <Breaker/>
-            <Link className='btn btn-default' to='/tickets'>Back</Link>
-          </div>
-        </div>
       </ItemForm>
     )
   }

@@ -1,6 +1,7 @@
 // import type {  } from 'flow/types'
 import React from 'react'
 import classnames from 'classnames'
+import type { FieldType } from 'flow/types'
 import Item from './item'
 import styles from './list.styl'
 
@@ -8,7 +9,8 @@ type PropsType = {
   items: Attay<Object>,
   resource: string,
   url?: string,
-  actions: Attay<Object>
+  actions: Attay<Object>,
+  fields: Array<FieldType>
 }
 
 const List = (props: PropsType) => {
@@ -17,8 +19,12 @@ const List = (props: PropsType) => {
     <table className={cssTable}>
       <thead>
         <tr>
-          <th key='title' className="text-center col-xs-10">Title</th>
-          <th key='actions' className="text-center col-xs-2">Actions</th>
+          {
+            props.fields.map(field => (
+              <th key={field.label} className="text-center">{field.label}</th>
+            ))
+          }
+          <th key='actions' className="text-center col-xs-4">Actions</th>
         </tr>
       </thead>
       <tbody>

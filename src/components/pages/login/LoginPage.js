@@ -31,7 +31,6 @@ class LoginPage extends React.Component {
     const { currentUser = {}, handleSubmit, dispatch } = this.props
 
     const onSubmit = handleSubmit((values) => {
-      console.log("handleSubmit!!", values)
       dispatch(UserActions.login(values.email, values.password))
     })
 

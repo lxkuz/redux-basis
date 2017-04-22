@@ -7,9 +7,8 @@ import uuid from 'uuid'
 
 import Api from 'src/api/Api'
 import * as UserActions from 'actions/userActions'
-import config from 'src/config'
 
-export default function userSagaBuilder(dispatch: Function) {
+export default function userSagaBuilder() {
   function *loginUser(action) {
     const { email, password } = action
     try {
@@ -29,19 +28,19 @@ export default function userSagaBuilder(dispatch: Function) {
 
   function logoutUser() {
     localStorage.removeItem(AUTH_TOKEN_KEY)
-    browserHistory.push('login')
+    browserHistory.push('/login')
   }
 
   function *fetchUser(action) {
     const { id } = action
     try {
-      const { data, response} = yield call(Api.user.get, { id })
+      const { data, response} = yield call(Api.users.get, { id })
       if (response.status == 200 && data) {
         yield put(UserActions.fetchUserSuccess(data))
       }
     } catch (errors) {
       localStorage.removeItem(AUTH_TOKEN_KEY)
-      browserHistory.push('login')
+      browserHistory.push('/login')
       const errorsByUniqKey = errors.map(v => (
         { [uuid.v1()]: v }
       ))

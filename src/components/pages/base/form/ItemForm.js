@@ -1,27 +1,27 @@
 // import type {  } from 'flow/types'
 import React from 'react'
-import { Link } from 'react-router'
-import type { TickerType, DispatchType } from 'flow/types'
+import type { DispatchType, NodeType } from 'flow/types'
 import { reduxForm } from 'redux-form'
+import { Link } from 'react-router'
 import * as requestsActions from 'actions/requestsActions'
 import { generateSubmitCallback } from 'helpers/ResourcesHelper'
-import styles from './form.styl'
 
 type PropsType = {
   resource: string,
-  item: TickerType,
+  handleSubmit: Function,
   dispatch: DispatchType,
-  children?: Array<Object>,
+  children?: NodeType,
   params?: Object,
-  form: string
+  form: string,
+  onSubmit?: Function
 }
 
 class ItemForm extends React.Component {
-  constructor(props: PropsType) {
-    super(props)
-    if (props.params && props.params.id) {
-      const { dispatch } = props
-      dispatch(requestsActions.get(props.resource, { form: props.form, id: props.params.id }))
+  props: PropsType
+  componentDidMount() {
+    if (this.props.params && this.props.params.id) {
+      const { dispatch } = this.props
+      dispatch(requestsActions.get(this.props.resource, { form: this.props.form, id: this.props.params.id }))
     }
   }
 
@@ -32,11 +32,19 @@ class ItemForm extends React.Component {
   // }
 
   render() {
-    const { item, resource, dispatch, handleSubmit } = this.props
-    const onSubmit = this.props.onSubmit || generateSubmitCallback(handleSubmit, dispatch, resource)
+    const { resource, dispatch, handleSubmit, params } = this.props
+    const onSubmit = generateSubmitCallback(handleSubmit, dispatch, resource, params && params.id)
     return (
       <form className="form-horizontal" onSubmit={onSubmit}>
         { this.props.children }
+        <hr/>
+        <div className='row'>
+          <div className='col-xs-4'/>
+          <div className='btn-toolbar col-xs-8'>
+            <button className="btn btn-primary">Submit</button>
+            <Link className='btn btn-default' to={`/${resource}`}>Back</Link>
+          </div>
+        </div>
       </form>
     )
   }

@@ -54,3 +54,8 @@ export type ReportType = {
   id: number,
   name: string
 }
+
+export type FieldType = {
+  label: string,
+  value: any
+}

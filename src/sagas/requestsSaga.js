@@ -33,12 +33,22 @@ function *createItem(action) {
   }
 }
 
+function *updateItem(action) {
+  const { data, resource } = action.payload
+  try {
+    const res = yield call(Api[resource].update, data)
+    yield put(requestsActions.updateSuccess(resource, res))
+    yield put(push(`/${resource}`))
+  } catch (e) {
+    yield put(requestsActions.requestFailure(resource, e))
+  }
+}
+
 function *getItem(action) {
   const { params, resource } = action.payload
   const { form } = params
   try {
     const res = yield call(Api[resource].get, R.omit(['form'], params))
-    console.log(res)
     yield put(requestsActions.getSuccess(resource, res.data, form))
   } catch (e) {
     yield put(requestsActions.requestFailure(resource, e))
@@ -59,6 +69,7 @@ function *requestsSaga(): Generator<*, *, *> {
   yield takeLatest(requestsActions.DESTROY_REQUEST, destroyItem)
   yield takeLatest(requestsActions.INDEX_REQUEST, indexItems)
   yield takeLatest(requestsActions.CREATE_REQUEST, createItem)
+  yield takeLatest(requestsActions.UPDATE_REQUEST, updateItem)
   yield takeLatest(requestsActions.GET_REQUEST, getItem)
 }
 

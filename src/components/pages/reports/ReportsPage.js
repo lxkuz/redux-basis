@@ -1,37 +1,46 @@
 import React from 'react'
+import moment from 'moment'
 import { connect } from 'react-redux'
-import { Link } from 'react-router'
-import type { DispatchType, reportType } from 'flow/types'
+import type { DispatchType, reportType, UserType } from 'flow/types'
 import List from 'components/pages/base/items/List'
+import { Clearer, NewRecordLink } from 'helpers/ViewHelper'
 import { buildActions } from 'helpers/ResourcesHelper'
-import { Clearer } from 'helpers/ViewHelper'
 import * as requestsActions from 'actions/requestsActions'
 
 type PropsType = {
   dispatch: DispatchType,
-  reports: Array<reportType>
+  reports: Array<reportType>,
+  currentUser?: UserType
 }
 
 class ReportsPage extends React.Component {
   props: PropsType
-  componentWillMount() {
+  componentDidMount() {
     const { dispatch } = this.props
     dispatch(requestsActions.index('reports', {}))
   }
 
   render() {
-    const { reports, dispatch } = this.props
+    const { reports, dispatch, currentUser } = this.props
     const resource = 'reports'
-    const actions = buildActions(dispatch, resource, ['destroy'])
+    const actions = buildActions(currentUser, dispatch, resource, ['update', 'destroy'])
+    const fields = [
+      { label: 'Title', value: 'title' },
+      { label: 'Created at', value: (obj: Object) => {
+        return moment.unix(obj.created_at).format('MMM Do YYYY')
+      } }
+    ]
     return (
       <div>
         <div className='form-group'>
-          <Link className='btn btn-primary pull-right' to='/reports/new'>
-            New report
-          </Link>
+          <NewRecordLink
+            label='New report'
+            currentUser={currentUser}
+            resource='reports'
+          />
           <Clearer/>
         </div>
-        <List items={reports} resource={resource} actions={actions}/>
+        <List items={reports} resource={resource} fields={fields} actions={actions}/>
       </div>
     )
   }

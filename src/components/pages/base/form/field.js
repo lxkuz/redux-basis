@@ -19,7 +19,3 @@ export const FieldBootstrap = (props: PropsType) => {
     </div>
   )
 }
-
-
-
-

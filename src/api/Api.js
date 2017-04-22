@@ -1,9 +1,11 @@
   // @flow
 import config from 'src/config'
 import type { UserType } from 'flow/types'
-import { crudBuilder, jsonFetch, authorizedJSONFetch, paramsToOptions } from './ApiHelper'
+import { crudBuilder, jsonFetch, paramsToOptions } from './ApiHelper'
 
 const { backendRoot } = config
+
+const CRUD = ['create', 'index', 'get', 'update', 'destroy']
 
 export default {
   user: {
@@ -19,33 +21,15 @@ export default {
     },
     confirmation: token => (
       jsonFetch(`${backendRoot}/user/confirmation?confirmation_token=${token}`, { method: 'GET' })
-    ),
-    ...crudBuilder.resources(`${backendRoot}/users`, ['index', 'get', 'update', 'destroy'], 'formData')
+    )
   },
 
   signUp: (user: UserType) => (
     jsonFetch(`${backendRoot}/sign_up`, { method: 'POST', ...paramsToOptions(user, 'json') })
   ),
 
-  tickets: crudBuilder.resources(`${backendRoot}/tickets`, ['index', 'create', 'destroy', 'get']),
-  users: crudBuilder.resources(`${backendRoot}/users`, ['index', 'create', 'destroy', 'get']),
-  ticket_kinds: crudBuilder.resources(`${backendRoot}/ticket_kinds`, ['index', 'create', 'destroy', 'get']),
-  reports: crudBuilder.resources(`${backendRoot}/reports`, ['index', 'create', 'destroy', 'get'])
-
-  // streamItems: crudBuilder.resources(`${backendRoot}/stream_items`, ['index', 'get']),
-
-  // userAct: crudBuilder.resources(({ actId }) => `${backendRoot}/acts/${actId}/user_acts`, ['create', 'get']),
-
-  // createUserActWithNewAct: crudBuilder.resources(`${backendRoot}/user_acts`, ['create'], 'formData'),
-
-  // toggleSaved: crudBuilder.resources(({ actId }) => `${backendRoot}/acts/${actId}/toggle`, ['create']),
-
-  // comments: crudBuilder.resources(
-  //   ({ actId, userActId }) => `${backendRoot}/acts/${actId}/user_acts/${userActId}/comments`,
-  //   ['index', 'get', 'create']
-  // ),
-
-  // organizations: crudBuilder.resources(`${backendRoot}/organizations`,
-  //   ['index', 'get', 'create', 'destroy'], 'formData'),
-  // tags: crudBuilder.resources(`${backendRoot}/tags`, ['index', 'get', 'destroy']),
+  tickets: crudBuilder.resources(`${backendRoot}/tickets`, CRUD),
+  users: crudBuilder.resources(`${backendRoot}/users`, CRUD),
+  ticket_kinds: crudBuilder.resources(`${backendRoot}/ticket_kinds`, CRUD),
+  reports: crudBuilder.resources(`${backendRoot}/reports`, CRUD)
 }

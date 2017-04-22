@@ -4,6 +4,7 @@ import * as actions from 'actions/requestsActions'
 import R from 'ramda'
 
 export default function (state: ?{} = null, action: ActionType) {
+  const data = action.payload && action.payload.data
   switch (action.type) {
     case actions.DESTROY_SUCCESS:
       const { id, resource } = action.payload
@@ -13,10 +14,12 @@ export default function (state: ?{} = null, action: ActionType) {
       }, objects)
       return R.assocPath([resource], results)(state)
     case actions.INDEX_SUCCESS:
-      const { data } = action.payload
       return R.assocPath([action.payload.resource], data)(state)
     case actions.REQUEST_FAILURE:
       return R.assocPath([action.payload.resource], [])(state)
+      // @flow
+    case actions.GET_SUCCESS:
+      return R.assocPath(['showObject'], data)(state)
     default:
       return state
   }

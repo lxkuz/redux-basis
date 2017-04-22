@@ -8,7 +8,6 @@ import jwtDecode from 'jwt-decode'
 import reducer from 'src/reducers/reducers'
 import rootSaga from 'src/sagas/rootSaga'
 import { AUTH_TOKEN_KEY } from 'constants/base'
-import config from 'src/config' 
 import { fetchUser } from 'actions/userActions'
 
 const sagaMiddleware = createSagaMiddleware()
@@ -29,9 +28,6 @@ if (authToken != null) {
 }
 
 const store = createStore(reducer, initialStore, applyMiddleware(...middlewares))
-console.log(reducer)
-console.log(initialStore)
-console.log(middlewares)
 sagaMiddleware.run(rootSaga, store.dispatch)
 
 if (currentUserId) {
