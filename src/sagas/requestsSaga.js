@@ -14,7 +14,7 @@ function *destroyItem(action) {
     if (res.response.status == 200) {
       yield put(requestsActions.destroySuccess(resource, id))
     } else {
-      const error = { text: res.response.statusText, status: res.response.status }
+      const error = { errors: res.response.statusText, status: res.response.status }
       yield put(requestsActions.requestFailure(resource, error))
     }
   } catch (e) {

@@ -34,7 +34,7 @@ export default function userSagaBuilder() {
   function *fetchUser(action) {
     const { id } = action
     try {
-      const { data, response} = yield call(Api.users.get, { id })
+      const { data, response } = yield call(Api.users.get, { id })
       if (response.status == 200 && data) {
         yield put(UserActions.fetchUserSuccess(data))
       }

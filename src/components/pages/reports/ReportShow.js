@@ -7,7 +7,7 @@ type PropsType = {
 
 const ReportShow = (props: PropsType) => {
   const fields = [
-    { label: 'Name', value: 'title' },
+    { label: 'Title', value: 'title' },
     { label: 'Created at', value: (obj: Object) => {
       return moment.unix(obj.created_at).format('MMM Do YYYY')
     } }

@@ -53,10 +53,10 @@ const buildUpdateAction = (dispatch, resource) => {
 export const buildAction = (currentUser, dispatch, resource, action) => {
   if (!can(currentUser, action, resource)) return null
   switch(action) {
-    case 'destroy':
-      return buildDestroyAction(dispatch, resource)
     case 'update':
       return buildUpdateAction(dispatch, resource)
+    case 'destroy':
+      return buildDestroyAction(dispatch, resource)
     default:
       return buildDestroyAction(dispatch, resource)
   }

@@ -10,7 +10,7 @@ type PropType = {
 
 const Navigation = (props: PropType) => {
   const { currentUser } = props
-  if (!currentUser) return null
+  if (!currentUser || currentUser.errors) return null
   return (
     <ul className="nav navbar-nav">
       { can(currentUser, 'read', 'tickets') && <NavLink to='/tickets'>Tickets</NavLink> }

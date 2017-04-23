@@ -25,7 +25,7 @@ class ReportsPage extends React.Component {
     const resource = 'reports'
     const actions = buildActions(currentUser, dispatch, resource, ['update', 'destroy'])
     const fields = [
-      { label: 'Title', value: 'title' },
+      { label: 'Title', value: 'title', link: true },
       { label: 'Created at', value: (obj: Object) => {
         return moment.unix(obj.created_at).format('MMM Do YYYY')
       } }
@@ -33,6 +33,7 @@ class ReportsPage extends React.Component {
     return (
       <div>
         <div className='form-group'>
+          <h4 className='pull-left'>Reports</h4>
           <NewRecordLink
             label='New report'
             currentUser={currentUser}

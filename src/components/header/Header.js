@@ -19,7 +19,7 @@ const Header = (props: PropsType) => {
   }
 
   const userLabel = (user: UserType) => {
-    if(!user) return null
+    if(!user || user.errors) return null
     return (
       <li>
         <Link to={`/users/${user.id}`}>

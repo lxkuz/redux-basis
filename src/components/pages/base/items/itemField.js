@@ -14,7 +14,8 @@ const ItemField = (props: PropsType) => {
 
   return (
     <td key={field.label}>
-      <Link to={`/${resource}/${item.id}`}>{value}</Link>
+      { field.link && <Link to={`/${resource}/${item.id}`}>{value}</Link> }
+      { !field.link && <span>{value}</span> }
     </td>
   )
 }

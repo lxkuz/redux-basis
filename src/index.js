@@ -7,7 +7,7 @@ import { AppContainer } from 'react-hot-loader'
 import { Provider } from 'react-redux'
 import { syncHistoryWithStore } from 'react-router-redux'
 
-import Bootstrap from 'bootstrap/dist/css/bootstrap.css'
+require('bootstrap/dist/css/bootstrap.css')
 require('./assets/css/main.styl')
 require('./assets/css/fonts.styl')
 

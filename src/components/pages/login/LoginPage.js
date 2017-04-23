@@ -9,7 +9,7 @@ import { Link } from 'react-router'
 import { Button } from 'react-bootstrap'
 import * as UserActions from 'actions/userActions'
 import styles from './login-page.styl'
-
+import { ErrorMessage } from 'helpers/ViewHelper'
 type PropsType = {
   currentUser?: Object,
   handleSubmit: HandleSubmitType,
@@ -41,17 +41,29 @@ class LoginPage extends React.Component {
 
     return (
       <form className='form-horizontal' onSubmit={onSubmit}>
-        <Field label='Email' component='input' name='email'/>
-        <Field
-          label='Password'
-          component='input'
-          name='password'
-          type='password'
-        />
         <div className='row'>
           <div className='col-xs-4'/>
-          <div className='col-xs-8'>
-            <Button type='submit' className='btn btn-primary' >SIGN IN</Button>
+          <div className='col-xs-4'>
+            <ErrorMessage message={errorMessage}/>
+          </div>
+        </div>
+        <div className='row'>
+          <div className='col-xs-4'/>
+          <div className='col-xs-4'>
+            <Field label='Email' component='input' type='email' required name='email'/>
+            <Field
+              label='Password'
+              component='input'
+              name='password'
+              required
+              type='password'
+            />
+          </div>
+        </div>
+        <div className='row'>
+          <div className='col-xs-4'/>
+          <div className='col-xs-4'>
+            <Button type='submit' className='btn btn-primary pull-right'>SIGN IN</Button>
           </div>
         </div>
       </form>

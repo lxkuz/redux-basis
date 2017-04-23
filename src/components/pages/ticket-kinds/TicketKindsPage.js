@@ -23,12 +23,13 @@ class TicketKindsPage extends React.Component {
     const { ticketKinds, dispatch, currentUser } = this.props
     const resource = 'ticket_kinds'
     const fields = [
-      { label: 'Name', value: 'name' }
+      { label: 'Name', value: 'name', link: true }
     ]
     const actions = buildActions(currentUser, dispatch, resource, ['update', 'destroy'])
     return (
       <div>
         <div className='form-group'>
+          <h4 className='pull-left'>Ticket kinds</h4>
           <NewRecordLink
             label='New ticket kind'
             currentUser={currentUser}

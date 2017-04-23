@@ -1,8 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router'
+import classnames from 'classnames'
 import type { UserType } from 'flow/types'
 import contentStyles from 'components/content/content.styl'
 import { can } from 'lib/ability'
+
 
 export const Clearer = () =>( <div className={contentStyles.clear}/> )
 
@@ -26,4 +28,19 @@ export const renderField = (object: Object, field: Object) => {
       <td className='col-xs-8'>{ value }</td>
     </tr>
   )
+}
+
+export const SmartLabel = (props: Object) => {
+  const { value, config } = props
+  return <span className={classnames(['label', config[value]])}>{value}</span>
+}
+
+type ErrorMessageType = {
+  message?: string
+}
+
+export const ErrorMessage = (props: ErrorMessageType) => {
+  const { message } = props
+  if(!message) return null
+  return <div className='control-group'><p className="text-danger">{message}</p></div>
 }
