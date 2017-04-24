@@ -26,7 +26,7 @@ class TicketsForm extends React.Component {
       <ItemForm item={{}} resource={'tickets'} dispatch={dispatch} {...this.props}>
         <Field component='input' name='name' label='Name'/>
         <Field component='textarea' name='description' label='Description'/>
-        <Field component='select' name='ticket_kind_id' label='Kind'>
+        <Field component='select' name='ticket_kind_id' label='Type'>
           <option value="">Select ticket kind...</option>
           {
             ticketKinds && ticketKinds.map((ticketKind: TicketKindType) => {
@@ -44,5 +44,6 @@ class TicketsForm extends React.Component {
 
 export default connect(state => ({
   currentUser: state.currentUser,
+  errors: state.requests && state.requests.errors,
   ticketKinds: state.requests && state.requests.ticket_kinds
 }))(TicketsForm)

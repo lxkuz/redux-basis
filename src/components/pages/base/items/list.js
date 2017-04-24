@@ -1,15 +1,15 @@
 // import type {  } from 'flow/types'
 import React from 'react'
 import classnames from 'classnames'
-import type { FieldType } from 'flow/types'
+import type { FieldType, ResourceActionType } from 'flow/types'
 import Item from './item'
 import styles from './list.styl'
 
 type PropsType = {
-  items: Attay<Object>,
+  items: Array<Object>,
   resource: string,
   url?: string,
-  actions: Attay<Object>,
+  actions: Array<ResourceActionType>,
   fields: Array<FieldType>
 }
 

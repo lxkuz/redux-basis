@@ -1,5 +1,6 @@
 import R from 'ramda'
 import React from 'react'
+import type { ResourceActionType, DispatchType, UserType } from 'flow/types'
 import { push } from 'react-router-redux'
 import { can } from 'lib/ability'
 import * as requestsActions from 'actions/requestsActions'
@@ -10,7 +11,8 @@ const btnClasses = {
   show: 'btn btn-sm'
 }
 
-export const renderAction = (item, resource, action) => {
+export const renderAction = (item: Object,
+resource: string, action: ResourceActionType) => {
   return (
     <a
       key={action.type}
@@ -22,7 +24,7 @@ export const renderAction = (item, resource, action) => {
   )
 }
 
-export const renderActions = (item, resource, actions) => {
+export const renderActions = (item: Object, resource: string, actions: Array<ResourceActionType>) => {
   return (
     <div className='btn-toolbar'>
       { R.map(R.curry(renderAction)(item, resource), actions) }
@@ -30,27 +32,28 @@ export const renderActions = (item, resource, actions) => {
   )
 }
 
-const buildDestroyAction = (dispatch, resource) => {
+const buildDestroyAction = (dispatch: DispatchType, resource: string) => {
   return {
     name: 'Delete',
     type: 'destroy',
-    callback: (id) => {
+    callback: (id: string) => {
       dispatch(requestsActions.destroy(resource, id))
     }
   }
 }
 
-const buildUpdateAction = (dispatch, resource) => {
+const buildUpdateAction = (dispatch: DispatchType, resource: string) => {
   return {
     name: 'Edit',
     type: 'update',
-    callback: (id) => {
+    callback: (id: string) => {
       dispatch(push(`/${resource}/${id}/edit`))
     }
   }
 }
 
-export const buildAction = (currentUser, dispatch, resource, action) => {
+export const buildAction = (currentUser: ?UserType,
+dispatch: DispatchType, resource: string, action: string) => {
   if (!can(currentUser, action, resource)) return null
   switch(action) {
     case 'update':
@@ -62,12 +65,16 @@ export const buildAction = (currentUser, dispatch, resource, action) => {
   }
 }
 
-export const buildActions = (currentUser, dispatch, resource, actions) => {
-  return R.filter(R.identity)(R.map(R.curry(buildAction)(currentUser, dispatch, resource), actions))
+export const buildActions = (currentUser: ?UserType,
+dispatch: DispatchType,
+resource: string, actions: Array<string>) => {
+  return R.filter(R.identity)(R.map(
+    R.curry(buildAction)(currentUser, dispatch, resource), actions))
 }
 
-export const generateSubmitCallback = (handleSubmit, dispatch, resource, id = null) => {
-  return handleSubmit((values) => {
+export const generateSubmitCallback = (handleSubmit: Function,
+dispatch: DispatchType, resource: string, id: ?string = null) => {
+  return handleSubmit((values: Object) => {
     if(id) {
       dispatch(requestsActions.update(resource, { id, ...values }))
     } else {

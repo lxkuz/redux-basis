@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import type { DispatchType } from 'flow/types'
 import { FieldBootstrap as Field } from 'components/pages/base/form/field'
 import ItemForm from 'components/pages/base/form/ItemForm'
 

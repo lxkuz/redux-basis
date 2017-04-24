@@ -2,7 +2,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
 import Api from 'src/api/Api'
 import * as exportActions from 'actions/exportActions'
-import * as requestsActions from 'actions/requestsActions'
 
 function *exportReport(action) {
   try {

@@ -1,6 +1,7 @@
 // import type {  } from 'flow/types'
 import React from 'react'
 import { renderActions } from 'helpers/ResourcesHelper'
+import type { FieldType } from 'flow/types'
 import ItemField from './ItemField'
 
 type PropsType = {

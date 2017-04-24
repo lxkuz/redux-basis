@@ -1,6 +1,7 @@
 import React from 'react'
 import moment from 'moment'
 import Show from 'components/pages/base/show/show'
+import type { TicketType } from 'flow/types'
 import { TicketStatusLabel } from './TicketsPage'
 type PropsType = {
 }

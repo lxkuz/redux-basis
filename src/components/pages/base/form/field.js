@@ -6,7 +6,8 @@ import { Field } from 'redux-form'
 type PropsType = {
   label?: string,
   name: string,
-  component: any
+  component: any,
+  touched?: boolean
 }
 
 export const FieldBootstrap = (props: PropsType) => {

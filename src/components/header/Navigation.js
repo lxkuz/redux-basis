@@ -13,10 +13,10 @@ const Navigation = (props: PropType) => {
   if (!currentUser || currentUser.errors) return null
   return (
     <ul className="nav navbar-nav">
-      { can(currentUser, 'read', 'tickets') && <NavLink to='/tickets'>Tickets</NavLink> }
+      { can(currentUser, 'read', 'tickets') && <NavLink to='/tickets'>Requests</NavLink> }
       { can(currentUser, 'read', 'users') && <NavLink to='/users'>Users</NavLink> }
       { can(currentUser, 'read', 'reports') && <NavLink to='/reports'>Reports</NavLink> }
-      { can(currentUser, 'read', 'ticket_kinds') && <NavLink to='/ticket_kinds'>Ticket kinds</NavLink> }
+      { can(currentUser, 'read', 'ticket_kinds') && <NavLink to='/ticket_kinds'>Request types</NavLink> }
     </ul>
   )
 }

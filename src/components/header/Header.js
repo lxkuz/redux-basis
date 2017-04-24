@@ -7,7 +7,7 @@ import Navigation from './Navigation'
 import NavLink from './NavLink'
 
 type PropsType = {
-  currentUser?: UserType,
+  currentUser: ?UserType,
   dispatch: DispatchType
 }
 
@@ -18,7 +18,7 @@ const Header = (props: PropsType) => {
     dispatch(userActions.logout())
   }
 
-  const userLabel = (user: UserType) => {
+  const userLabel = (user: ?UserType) => {
     if(!user || user.errors) return null
     return (
       <li>

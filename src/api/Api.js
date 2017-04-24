@@ -19,7 +19,7 @@ export default {
           }
         }).catch((errors) => {throw errors})
     },
-    confirmation: token => (
+    confirmation: (token: string) => (
       jsonFetch(`${backendRoot}/user/confirmation?confirmation_token=${token}`, { method: 'GET' })
     )
   },
@@ -30,14 +30,14 @@ export default {
 
   tickets: crudBuilder.resources(`${backendRoot}/tickets`, CRUD),
   users: crudBuilder.resources(`${backendRoot}/users`, CRUD),
-  ticket_kinds: crudBuilder.resources(`${backendRoot}/ticket_kinds`, CRUD),
+  ticket_kinds: crudBuilder.resources(`${backendRoot}/ticket_kinds`, CRUD), // eslint-disable-line camelcase
   reports: crudBuilder.resources(`${backendRoot}/reports`, CRUD),
 
   export: {
     report: (id: string) => {
       const url = `${backendRoot}/export/reports/${id}`
       return authorizedFetch(url, { method: 'GET' })
-      .then(response => response.blob()).then(function(blob) {
+      .then(response => response.blob()).then(function (blob) {
         // const headers = response.headers
         // const blob = new Blob([response])
         // // , { type:headers['content-type'] })

@@ -23,6 +23,6 @@ const PdfButton = (props: PropsType) => {
   )
 }
 
-export default connect((state: PropsType) => {
+export default connect((state) => {
   return { currentUser: state.currentUser, loading: state.loading && state.loading.report }
 })(PdfButton)

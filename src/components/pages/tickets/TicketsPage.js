@@ -1,6 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router'
 import type { UserType, DispatchType, TicketType } from 'flow/types'
 import List from 'components/pages/base/items/List'
 import { buildActions } from 'helpers/ResourcesHelper'
@@ -9,7 +8,7 @@ import * as requestsActions from 'actions/requestsActions'
 
 
 
-export const TicketStatusLabel = (props: string) => {
+export const TicketStatusLabel = (props: Object) => {
   const statusHash = {
     closed: 'label-success',
     waiting: 'label-warning'
@@ -40,7 +39,7 @@ class TicketsPage extends React.Component {
       { label: 'Name', value: 'name', link: true },
       { label: 'Status', value: (obj: TicketType) => ( <TicketStatusLabel status={obj.status}/> ) },
       {
-        label: 'Kind',
+        label: 'Type',
         value: (obj: Object) => ( obj.ticket_kind && obj.ticket_kind.name )
       }
     ]
@@ -53,9 +52,9 @@ class TicketsPage extends React.Component {
     return (
       <div>
         <div className='form-group'>
-          <h4 className='pull-left'>Tickets</h4>
+          <h4 className='pull-left'>Requests</h4>
           <NewRecordLink
-            label='New ticket'
+            label='New request'
             currentUser={currentUser}
             resource='tickets'
           />

@@ -36,11 +36,22 @@ export const SmartLabel = (props: Object) => {
 }
 
 type ErrorMessageType = {
-  message?: string
+  message?: any
 }
 
 export const ErrorMessage = (props: ErrorMessageType) => {
   const { message } = props
   if(!message) return null
-  return <div className='control-group'><p className="text-danger">{message}</p></div>
+  if(typeof message == 'string') return <div className='control-group'><p className="text-danger">{message}</p></div>
+  return (
+    <div className='control-group'>
+      <ul>
+        {
+          Object.keys(message).map(key => (
+            <li key={key} className="text-danger">{`${key}: ${message[key].join(', ')}`}</li>
+          ))
+        }
+      </ul>
+    </div>
+  )
 }

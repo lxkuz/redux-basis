@@ -36,12 +36,16 @@ export type UserType = {
   id: number,
   email: string,
   name: string,
+  role: string,
   updated_at: number
 }
 
 export type TicketType = {
   id: number,
   name: string,
+  status: string,
+  created_at: number,
+  agent_id?: number,
   description?: string
 }
 
@@ -58,4 +62,11 @@ export type ReportType = {
 export type FieldType = {
   label: string,
   value: any
+}
+
+
+export type ResourceActionType = {
+  name: string,
+  type: string,
+  callback: Function
 }

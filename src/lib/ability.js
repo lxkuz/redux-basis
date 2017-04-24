@@ -1,3 +1,5 @@
+import type { UserType } from 'flow/types'
+
 export const AgentRules = {
   tickets: {
     update: true,
@@ -22,7 +24,7 @@ export const CustomerRules = {
 export const AdminRules = {
   tickets: true,
   users: true,
-  ticket_kinds: true,
+  ticket_kinds: true, // eslint-disable-line camelcase
   reports: true
 }
 
@@ -32,8 +34,8 @@ export const AbilityRules = {
   admin: AdminRules
 }
 
-export const can = (user, action, resource) => {
-  if(!user) return false
+export const can = (user: ?UserType, action: string, resource: string) => {
+  if(!user || user.errors ) return false
   const rules = AbilityRules[user.role][resource]
   if (typeof rules == 'object') return !!rules[action]
   return !!rules

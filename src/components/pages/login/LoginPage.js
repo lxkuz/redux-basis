@@ -5,11 +5,10 @@ import R from 'ramda'
 import { reduxForm, untouch } from 'redux-form'
 import { FieldBootstrap as Field } from 'components/pages/base/form/field'
 import { connect } from 'react-redux'
-import { Link } from 'react-router'
 import { Button } from 'react-bootstrap'
-import * as UserActions from 'actions/userActions'
-import styles from './login-page.styl'
 import { ErrorMessage } from 'helpers/ViewHelper'
+import * as UserActions from 'actions/userActions'
+
 type PropsType = {
   currentUser?: Object,
   handleSubmit: HandleSubmitType,
@@ -40,7 +39,7 @@ class LoginPage extends React.Component {
       R.path([0]))(currentUser)
 
     return (
-      <form className='form-horizontal' onSubmit={onSubmit}>
+      <form autoComplete="off" className='form-horizontal' onSubmit={onSubmit}>
         <div className='row'>
           <div className='col-xs-4'/>
           <div className='col-xs-4'>

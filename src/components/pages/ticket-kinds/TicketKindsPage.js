@@ -29,9 +29,9 @@ class TicketKindsPage extends React.Component {
     return (
       <div>
         <div className='form-group'>
-          <h4 className='pull-left'>Ticket kinds</h4>
+          <h4 className='pull-left'>Request types</h4>
           <NewRecordLink
-            label='New ticket kind'
+            label='New request type'
             currentUser={currentUser}
             resource='ticket_kinds'
           />

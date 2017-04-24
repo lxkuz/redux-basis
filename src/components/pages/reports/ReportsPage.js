@@ -1,7 +1,7 @@
 import React from 'react'
 import moment from 'moment'
 import { connect } from 'react-redux'
-import type { DispatchType, reportType, UserType } from 'flow/types'
+import type { DispatchType, ReportType, UserType } from 'flow/types'
 import List from 'components/pages/base/items/List'
 import { Clearer, NewRecordLink } from 'helpers/ViewHelper'
 import { buildActions } from 'helpers/ResourcesHelper'
@@ -9,7 +9,7 @@ import * as requestsActions from 'actions/requestsActions'
 
 type PropsType = {
   dispatch: DispatchType,
-  reports: Array<reportType>,
+  reports: Array<ReportType>,
   currentUser?: UserType
 }
 

@@ -1,6 +1,7 @@
 // import type {  } from 'flow/types'
 import React from 'react'
 import { Link } from 'react-router'
+import type { FieldType } from 'flow/types'
 
 type PropsType = {
   resource: string,
