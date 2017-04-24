@@ -41,7 +41,6 @@ type ErrorMessageType = {
 
 export const ErrorMessage = (props: ErrorMessageType) => {
   const { message } = props
-  console.log('ErrorMessage', message)
   if(!message) return null
   if(typeof message == 'string') return <div className='control-group'><p className="text-danger">{message}</p></div>
   return (

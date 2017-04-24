@@ -22,7 +22,6 @@ export default function userSagaBuilder() {
       const errorsByUniqKey = errors.map(v => (
         { [uuid.v1()]: v }
       ))
-      console.log(errorsByUniqKey, "errorsByUniqKey on LOGIN")
       yield put(UserActions.loginFailure({ errors: errorsByUniqKey, ...action }))
     }
   }

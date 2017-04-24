@@ -1,6 +1,5 @@
 // import type {  } from 'flow/types'
 import React from 'react'
-import R from 'ramda'
 import type { DispatchType, NodeType } from 'flow/types'
 import { reduxForm } from 'redux-form'
 import { Link } from 'react-router'
