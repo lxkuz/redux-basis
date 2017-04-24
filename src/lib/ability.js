@@ -33,7 +33,7 @@ export const AbilityRules = {
 }
 
 export const can = (user, action, resource) => {
-  if(!user) return false
+  if(!user || user.errors ) return false
   const rules = AbilityRules[user.role][resource]
   if (typeof rules == 'object') return !!rules[action]
   return !!rules

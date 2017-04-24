@@ -26,10 +26,15 @@ function *createItem(action) {
   const { data, resource } = action.payload
   try {
     const res = yield call(Api[resource].create, data)
-    yield put(requestsActions.createSuccess(resource, res))
-    yield put(push(`/${resource}`))
+    if (res.response.status == 200) {
+      yield put(requestsActions.createSuccess(resource, res))
+      yield put(push(`/${resource}`))
+    } else {
+      const error = res.data && res.data.errors || { error: [res] }
+      throw(error)
+    }
   } catch (e) {
-    yield put(requestsActions.requestFailure(resource, e))
+    yield put(requestsActions.formRequestFailure(resource, e))
   }
 }
 

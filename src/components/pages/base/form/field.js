@@ -6,7 +6,9 @@ import { Field } from 'redux-form'
 type PropsType = {
   label?: string,
   name: string,
-  component: any
+  component: any,
+  touched?: aboolean,
+  error?: array
 }
 
 export const FieldBootstrap = (props: PropsType) => {
@@ -15,6 +17,7 @@ export const FieldBootstrap = (props: PropsType) => {
       <label htmlFor="name" className="col-xs-4 control-label">{props.label || props.name}</label>
       <div className="col-xs-4">
         <Field className="form-control" {...R.omit(['label'], props)}/>
+        {props.touched && props.error && <span className='text-danger'>{props.error.join(', ')}</span>}
       </div>
     </div>
   )

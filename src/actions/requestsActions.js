@@ -1,6 +1,6 @@
 // @flow
 export const REQUEST_FAILURE = 'REQUEST_FAILURE'
-
+export const FORM_REQUEST_FAILURE = 'FORM_REQUEST_FAILURE'
 export const DESTROY_REQUEST = 'DESTROY_REQUEST'
 export const DESTROY_SUCCESS = 'DESTROY_SUCCESS'
 
@@ -70,3 +70,9 @@ export const requestFailure = (resource, error) => ({
   type: REQUEST_FAILURE,
   payload: { resource, error }
 })
+
+export const formRequestFailure = (resource, error) => ({
+  type: FORM_REQUEST_FAILURE,
+  payload: { resource, data: error }
+})
+

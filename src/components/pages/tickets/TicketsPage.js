@@ -40,7 +40,7 @@ class TicketsPage extends React.Component {
       { label: 'Name', value: 'name', link: true },
       { label: 'Status', value: (obj: TicketType) => ( <TicketStatusLabel status={obj.status}/> ) },
       {
-        label: 'Kind',
+        label: 'Type',
         value: (obj: Object) => ( obj.ticket_kind && obj.ticket_kind.name )
       }
     ]
@@ -53,9 +53,9 @@ class TicketsPage extends React.Component {
     return (
       <div>
         <div className='form-group'>
-          <h4 className='pull-left'>Tickets</h4>
+          <h4 className='pull-left'>Requests</h4>
           <NewRecordLink
-            label='New ticket'
+            label='New request'
             currentUser={currentUser}
             resource='tickets'
           />

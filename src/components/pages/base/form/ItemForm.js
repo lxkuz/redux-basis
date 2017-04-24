@@ -1,10 +1,13 @@
 // import type {  } from 'flow/types'
 import React from 'react'
+import R from 'ramda'
 import type { DispatchType, NodeType } from 'flow/types'
 import { reduxForm } from 'redux-form'
 import { Link } from 'react-router'
 import * as requestsActions from 'actions/requestsActions'
 import { generateSubmitCallback } from 'helpers/ResourcesHelper'
+import { ErrorMessage } from 'helpers/ViewHelper'
+import { SubmissionError } from 'redux-form'
 
 type PropsType = {
   resource: string,
@@ -13,9 +16,9 @@ type PropsType = {
   children?: NodeType,
   params?: Object,
   form: string,
-  onSubmit?: Function
+  onSubmit?: Function,
+  errors?: Object
 }
-
 class ItemForm extends React.Component {
   props: PropsType
   componentDidMount() {
@@ -25,17 +28,17 @@ class ItemForm extends React.Component {
     }
   }
 
-  // componentWillMount() {
-  //   const { dispatch, currentUser } = this.props
-  //   if (currentUser == null) return
-  //   dispatch(initialize(FORM_KEY, convertData(currentUser), FIELDS))
-  // }
-
   render() {
-    const { resource, dispatch, handleSubmit, params } = this.props
+    const { resource, dispatch, handleSubmit, params, errors } = this.props
     const onSubmit = generateSubmitCallback(handleSubmit, dispatch, resource, params && params.id)
     return (
-      <form className="form-horizontal" onSubmit={onSubmit}>
+      <form autoComplete="off" className="form-horizontal" onSubmit={onSubmit}>
+        { errors && <div className='row'>
+          <div className='col-xs-4'/>
+          <div className='col-xs-4'>
+            <ErrorMessage message={errors}/>
+          </div>
+        </div> }
         { this.props.children }
         <hr/>
         <div className='row'>

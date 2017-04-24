@@ -40,7 +40,7 @@ class LoginPage extends React.Component {
       R.path([0]))(currentUser)
 
     return (
-      <form className='form-horizontal' onSubmit={onSubmit}>
+      <form autoComplete="off" className='form-horizontal' onSubmit={onSubmit}>
         <div className='row'>
           <div className='col-xs-4'/>
           <div className='col-xs-4'>

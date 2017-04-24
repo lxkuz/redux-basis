@@ -22,6 +22,7 @@ export default function userSagaBuilder() {
       const errorsByUniqKey = errors.map(v => (
         { [uuid.v1()]: v }
       ))
+      console.log(errorsByUniqKey, "errorsByUniqKey on LOGIN")
       yield put(UserActions.loginFailure({ errors: errorsByUniqKey, ...action }))
     }
   }
@@ -38,13 +39,23 @@ export default function userSagaBuilder() {
       if (response.status == 200 && data) {
         yield put(UserActions.fetchUserSuccess(data))
       }
-    } catch (errors) {
-      localStorage.removeItem(AUTH_TOKEN_KEY)
+      if (data.errors) throw(data.errors)
+    } catch (errorParams) {
+      console.log(errorParams, "errorParams")
+      let errors
+      if (typeof errorParams == 'string') {
+        errors = [errorParams]
+      } else {
+        errors = errorParams
+      }
+      
+      // localStorage.removeItem(AUTH_TOKEN_KEY)
       browserHistory.push('/login')
       const errorsByUniqKey = errors.map(v => (
         { [uuid.v1()]: v }
       ))
-      yield put(UserActions.loginFailure(errorsByUniqKey))
+      console.log(errorsByUniqKey, "errorsByUniqKey ON FETCH")
+      yield put(UserActions.loginFailure({errors: errorsByUniqKey, ...action}))
     }
   }
   return function *userSaga(): Generator<*, *, *> {
