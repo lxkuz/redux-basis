@@ -48,8 +48,8 @@ class LoginPage extends React.Component {
           </div>
         </div>
         <div className='row'>
-          <div className='col-xs-4'/>
-          <div className='col-xs-4'>
+          <div className='col-xs-2'/>
+          <div className='col-xs-8'>
             <Field label='Email' component='input' type='email' required name='email'/>
             <Field
               label='Password'
@@ -61,7 +61,7 @@ class LoginPage extends React.Component {
           </div>
         </div>
         <div className='row'>
-          <div className='col-xs-4'/>
+          <div className='col-xs-2'/>
           <div className='col-xs-4'>
             <Button type='submit' className='btn btn-primary pull-right'>SIGN IN</Button>
           </div>

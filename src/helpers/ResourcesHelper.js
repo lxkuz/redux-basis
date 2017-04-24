@@ -5,9 +5,9 @@ import { can } from 'lib/ability'
 import * as requestsActions from 'actions/requestsActions'
 
 const btnClasses = {
-  destroy: 'btn btn-danger btn-sm pull-right',
-  update: 'btn btn-primary btn-sm pull-right',
-  show: 'btn btn-sm pull-right'
+  destroy: 'btn btn-danger btn-sm',
+  update: 'btn btn-primary btn-sm',
+  show: 'btn btn-sm'
 }
 
 export const renderAction = (item, resource, action) => {

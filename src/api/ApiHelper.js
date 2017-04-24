@@ -25,6 +25,23 @@ export function jsonFetch(endpoint: string, options: HashType) {
 
 // calls fetch(endpoint, options) with default and auth headers and parse response data as json
 //
+
+export function authorizedFetch(endpoint: string, options: HashType = {}) {
+  return new Promise((resolve, reject) => {
+    const token: ?string = localStorage.getItem(AUTH_TOKEN_KEY) || null
+    if (typeof token === 'string') {
+      resolve({
+        ...options,
+        headers: {
+          ...options.headers,
+          ...authorizedHeaders(token)
+        }
+      })
+    }
+    reject({ error: new Error('Token should be a string'), status: 401 })
+  }).then((options: HashType) => fetch(endpoint, options))
+}
+
 export function authorizedJSONFetch(endpoint: string, options: HashType = {}) {
   return new Promise((resolve, reject) => {
     const token: ?string = localStorage.getItem(AUTH_TOKEN_KEY) || null
