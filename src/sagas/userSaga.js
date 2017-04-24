@@ -22,6 +22,7 @@ export default function userSagaBuilder() {
       const errorsByUniqKey = errors.map(v => (
         { [uuid.v1()]: v }
       ))
+      console.log(errorsByUniqKey, "errorsByUniqKey on LOGIN")
       yield put(UserActions.loginFailure({ errors: errorsByUniqKey, ...action }))
     }
   }
@@ -46,7 +47,6 @@ export default function userSagaBuilder() {
       } else {
         errors = errorParams
       }
-
       // localStorage.removeItem(AUTH_TOKEN_KEY)
       browserHistory.push('/login')
       const errorsByUniqKey = errors.map(v => (
