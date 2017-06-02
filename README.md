@@ -1,5 +1,12 @@
 Installation
 
+Initial state:
+
+  1) `mkdir Code`
+  2) `git clone  git@github.com:lxkuz/redux-basis.git --branch=crossover Code/client`
+  3) `git clone  git@github.com:lxkuz/rails5-api-basis.git --branch=crossover Code/api`
+  
+
 API: 
   
   Nest steps into `api` directory:  `cd Code/api`
